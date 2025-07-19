@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ShopCard({ shop }) {
     return (
-        <Link to={`/shop/${shop.id}`}>
+        <Link to={`/shopDetails/${shop.id}`}>
             <div className="border rounded-lg overflow-hidden hover:shadow-lg">
                 <img src={shop.image} alt={shop.name} className="h-[50vh] w-full object-cover object-center" />
                 <div className="p-4 bg-amber-200">

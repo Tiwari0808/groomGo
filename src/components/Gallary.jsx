@@ -1,4 +1,4 @@
-export function DefaultGallery() {
+export function Gallery() {
   const data = [
     {
       imageLink:
@@ -39,11 +39,11 @@ export function DefaultGallery() {
   ];
  
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 px-5">
+    <div className="grid grid-cols-3 gap-4  md:grid-cols-3 lg:grid-cols-4 px-5">
       {data.map(({ imageLink }, index) => (
         <div key={index}>
           <img
-            className="h-40 w-full max-w-full rounded-lg object-cover object-center"
+            className="h-30 md:h-40 w-full max-w-full rounded-lg object-cover object-center"
             src={imageLink}
             alt="gallery-photo"
           />

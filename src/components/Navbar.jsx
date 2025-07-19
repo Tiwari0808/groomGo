@@ -8,7 +8,10 @@ const Navbar = () => {
         <div onClick={()=>navigate('/')} className="">
            <h2 className="text-[26px] font-bold cursor-pointer">BookYourCut</h2>
         </div>
-        <div className="cursor-pointer">Your Booking</div>
+        <div className="flex">
+            <p onClick={()=>navigate('/admin')} className="cursor-pointer">Admin Login</p>
+            <p onClick={()=>navigate('/bookings')} className="cursor-pointer ml-5">Your Booking</p>
+        </div>
     </nav>
     </>
   )

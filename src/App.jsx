@@ -1,9 +1,11 @@
 
-import { DefaultGallery } from './components/Gallary'
 import { Route, Routes } from 'react-router-dom'
 import Home from './components/home'
-import ShopDetails from './components/ShopDetails'
 import Navbar from './components/Navbar'
+import Admin from './components/Admin'
+import Bookings from './components/Bookings'
+import Book from './components/Book'
+import ShopDetails from './components/ShopDetails'
 
 const App = () => {
   return (
@@ -11,7 +13,10 @@ const App = () => {
     <Navbar/>
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='shop/:id' element={<ShopDetails/>}/>
+      <Route path='shopDetails/:id' element={<ShopDetails/>}/>
+      <Route path='/book' element={<Book/>}/>
+      <Route path='admin' element={<Admin/>}/>
+      <Route path='/bookings' element={<Bookings/>}/>
     </Routes>
     </>
   )
