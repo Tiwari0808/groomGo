@@ -4,13 +4,14 @@ const Navbar = () => {
     const navigate = useNavigate();
   return (
     <>
-    <nav className="bg-cyan-500 px-10 py-3 flex items-center text-amber-50 justify-between" >
+    <nav className="bg-gray-900 text-white px-6 py-4 shadow-md flex justify-between items-center sticky" >
         <div onClick={()=>navigate('/')} className="">
            <h2 className="text-[26px] font-bold cursor-pointer">BookYourCut</h2>
         </div>
-        <div className="flex">
-            <p onClick={()=>navigate('/admin')} className="cursor-pointer">Admin Login</p>
-            <p onClick={()=>navigate('/bookings')} className="cursor-pointer ml-5">Your Booking</p>
+        <div className="flex w-[40%] justify-evenly">
+            <a onClick={()=>navigate('/')} className="cursor-pointer hover:text-gray-300">Home</a>
+            <a onClick={()=>navigate('/bookings')} className="cursor-pointer hover:text-gray-300">My Booking</a>
+            <a onClick={()=>navigate('/admin')} className="cursor-pointer hover:text-gray-300">Admin</a>
         </div>
     </nav>
     </>

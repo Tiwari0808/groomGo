@@ -9,16 +9,16 @@ import ShopDetails from './components/ShopDetails'
 
 const App = () => {
   return (
-    <>
+    <div className='min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white'>
     <Navbar/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='shopDetails/:id' element={<ShopDetails/>}/>
-      <Route path='/book' element={<Book/>}/>
+      <Route path='/book/:id' element={<Book/>}/>
       <Route path='admin' element={<Admin/>}/>
       <Route path='/bookings' element={<Bookings/>}/>
     </Routes>
-    </>
+    </div>
   )
 }
 
