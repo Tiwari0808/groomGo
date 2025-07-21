@@ -1,28 +1,31 @@
 import ShopCard from "./shopCard";
-import pic4 from '../assets/images/pic4.jpg'
-import pic3 from '../assets/images/pic6.jpg'
 import { db } from "../firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
+import toast from "react-hot-toast";
 export default function Home() {
-  // const shops = [
-  //   { id: '0', name: "Gentlemen's Cut", address: 'Shop No. G112, MG Road, Pune', image: pic4 },
-  //   { id: '1', name: 'Modern Styles', address: 'Shop No. 10, FC Road, Pune', image: pic3 },
-  // ];
+
   const [shops, setShop] = useState([]);
   const [isloading, setIsLoading] = useState(true);
 
   const getData = async () => {
-    const snapshot = await getDocs(collection(db, 'shops'));
-    const shops = snapshot.docs.map((shop) => ({
-      id: shop.id,
-      ...shop.data()
-    }))
-    setShop(shops);
-    setIsLoading(false);
+    try {
+      const snapshot = await getDocs(collection(db, 'shops'));
+      const shops = snapshot.docs.map((shop) => ({
+        id: shop.id,
+        ...shop.data()
+      }))
+      setShop(shops);
+      toast.success('Data fetched')
+      setIsLoading(false);
+    } catch (error) {
+      toast.error('Something went wrong')
+    }
   }
-  getData()
+  useEffect(() => {
+    getData();
+  }, [])
 
   return !isloading ? (
     <div className="p-4 grid grid-cols-1 md:grid-cols-1 lg:px-30 gap-4">

@@ -2,35 +2,61 @@ import { useNavigate, useParams } from "react-router-dom"
 import pic4 from '../assets/images/pic4.jpg'
 import pic3 from '../assets/images/pic6.jpg'
 import { Gallery } from "./Gallary";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import toast from "react-hot-toast";
+import Spinner from "./Spinner";
+import { FaStar } from "react-icons/fa";
 
 const ShopDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const shops = [
-        { id: '1', name: "Gentlemen's Cut", address: 'Shop No. G112, MG Road, Pune', image: pic4 },
-        { id: '2', name: 'Modern Styles', address: 'Shop No. 10, FC Road, Pune', image: pic3 },
-    ];
-    return (
+    const [isloading, setIsLoading] = useState(true);
+    const [shop, setShop] = useState('');
+    const getShop = async () => {
+        try {
+            const snapshot = await getDocs(collection(db, 'shops'));
+            const shops = snapshot.docs.map((shop) => ({
+                id: shop.id,
+                ...shop.data()
+            }))
+            const shop = shops.find((item) => item.id === id);
+            setShop(shop)
+            setIsLoading(false);
+        } catch (error) {
+            toast.error('Something went wrong')
+        }
+    }
+    useEffect(() => {
+        getShop();
+    }, [])
+
+    return !isloading ? (
         <>
             <div className="flex flex-col md:flex-row px-4 py-15 gap-8 md:gap-12 md:px-12 text-white rounded-xl mx-auto shadow-2xl">
 
                 {/* Image and Button */}
                 <div className="w-full flex flex-col gap-6 items-center text-center">
                     <img
-                        src={shops[id].image}
-                        alt={shops[id].name}
+                        src={shop.image}
+                        alt={shop.shopName}
                         className="w-full md:w-[60%] h-[50vh] object-cover rounded-xl shadow-md"
                     />
                 </div>
 
                 {/* Shop Info */}
                 <div className="space-y-4">
-                    <h2 className="text-2xl lg:text-3xl font-bold">{shops[id].name}</h2>
+                    <div>
+                     <h2 className="text-2xl lg:text-3xl font-bold">{shop.shopName}</h2>
+                     <div className="flex items-center gap-2">
+                        <FaStar className="text-orange-500"/>
+                        {shop.rating}
+                     </div>
+                    </div>
+                    
                     <p className="text-gray-300 leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-                        voluptatem necessitatibus dolores dolore dolor rerum quis. Eum
-                        recusandae molestiae quo possimus eos explicabo consequuntur
-                        veritatis?
+                        {shop.description}
                     </p>
                     <button
                         onClick={() => navigate(`/book/${id}`)}
@@ -48,8 +74,7 @@ const ShopDetails = () => {
                 <Gallery />
             </div>
         </>
-    );
-
+    ) : <Spinner />
 }
 
 export default ShopDetails
