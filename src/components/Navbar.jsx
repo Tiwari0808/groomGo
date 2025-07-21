@@ -16,8 +16,8 @@ const Navbar = () => {
     }
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 shadow-md flex flex-col md:flex-row justify-between md:justify-between sticky top-0 z-50" >
-        <div onClick={()=>navigate('/')} className="flex items-center justify-between">
-           <h2 className="text-[26px] font-bold cursor-pointer"><span className="text-orange-500">G</span>roomGo</h2>
+        <div  className="flex items-center justify-between">
+           <h2 onClick={()=>navigate('/')} className="text-[26px] font-bold cursor-pointer"><span className="text-orange-500">G</span>roomGo</h2>
            <div onClick={()=>setOpen(!open)} className="md:hidden cursor-pointer">{open ? <RxCross2 className="h-7 w-7 text-orange-500"/> : <RxHamburgerMenu className="h-7 w-7 text-orange-500"/>}</div>
         </div>
         <div className={`md:flex ${!open ? 'hidden' : 'flex'} flex-col transition 0.3s md:flex-row mt-6 md:mt-0 md:w-[40%] justify-center md:justify-between gap-3 items-center`}>

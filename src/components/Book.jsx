@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import pic4 from '../assets/images/pic4.jpg';
 import pic3 from '../assets/images/pic6.jpg';
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import toast from "react-hot-toast";
 import Spinner from "./Spinner";
@@ -19,13 +19,15 @@ export default function Book() {
   const [date, setDate] = useState('')
   const [isLoading, setisLoading] = useState(false);
   const [shop, setShop] = useState('');
-  const {user} = useAuth();
+  const { user } = useAuth();
+
 
   const getShop = async () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     try {
-      if(!user) {
-        navigate('/login');
-      }
       const snapshot = await getDocs(collection(db, 'shops'));
       const shops = snapshot.docs.map((shop) => ({
         id: shop.id,
@@ -40,6 +42,8 @@ export default function Book() {
   }
 
   const bookingData = {
+    userId: user?user.uid:'',
+    shopName:shop.shopName,
     name,
     date,
     selectedSlot,
@@ -55,7 +59,8 @@ export default function Book() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
+    
     try {
 
       await addDoc(collection(db, 'bookings'), bookingData);
@@ -63,7 +68,7 @@ export default function Book() {
       clearData();
     } catch (error) {
       toast.error('Something went wrong')
-    }finally{
+    } finally {
       setisLoading(false)
     }
   };
@@ -122,7 +127,7 @@ export default function Book() {
         />
 
         <button
-        disabled={isLoading}
+          disabled={isLoading}
           type="submit"
           className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 transition text-white font-semibold px-4 py-2 rounded"
         >

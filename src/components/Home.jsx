@@ -48,9 +48,9 @@ export default function Home() {
       </section>
       <h2 id="nearbyShops" className="text-[20px] font-medium scroll-mt-20">Shops Near You</h2>
       {shops.map((shop) => (
-        <>
+        <div key={shop.id} >
           <ShopCard key={shop.id} shop={shop} />
-        </>
+        </div>
       ))}
     </div>
   ) : <Spinner />
