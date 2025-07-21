@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import pic4 from '../assets/images/pic4.jpg';
 import pic3 from '../assets/images/pic6.jpg';
@@ -6,22 +6,26 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import toast from "react-hot-toast";
 import Spinner from "./Spinner";
+import { useAuth } from "../context/Auth";
 
 
 
 export default function Book() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [selectedSlot, setSelectedSlot] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('')
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setisLoading] = useState(false);
   const [shop, setShop] = useState('');
-
+  const {user} = useAuth();
 
   const getShop = async () => {
     try {
+      if(!user) {
+        navigate('/login');
+      }
       const snapshot = await getDocs(collection(db, 'shops'));
       const shops = snapshot.docs.map((shop) => ({
         id: shop.id,
@@ -50,13 +54,17 @@ export default function Book() {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setisLoading(true)
     try {
-      e.preventDefault();
+
       await addDoc(collection(db, 'bookings'), bookingData);
       toast.success(`Booked for ${name} at ${selectedSlot}`);
       clearData();
     } catch (error) {
       toast.error('Something went wrong')
+    }finally{
+      setisLoading(false)
     }
   };
 
@@ -70,7 +78,7 @@ export default function Book() {
     getShop()
   }, [])
 
-  return !isLoading ? (
+  return shop ? (
     <div className="p-6 max-w-md mx-auto mt-8 bg-gray-900 text-white rounded-xl shadow-lg space-y-4">
       <img
         src={shop.image}
@@ -114,6 +122,7 @@ export default function Book() {
         />
 
         <button
+        disabled={isLoading}
           type="submit"
           className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 transition text-white font-semibold px-4 py-2 rounded"
         >

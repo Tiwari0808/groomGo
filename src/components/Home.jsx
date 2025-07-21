@@ -4,6 +4,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import toast from "react-hot-toast";
+import LoginPage from "./Login";
+import PhoneLogin from "./Login";
 export default function Home() {
 
   const [shops, setShop] = useState([]);
@@ -17,14 +19,13 @@ export default function Home() {
         ...shop.data()
       }))
       setShop(shops);
-      toast.success('Data fetched')
       setIsLoading(false);
     } catch (error) {
       toast.error('Something went wrong')
     }
   }
   useEffect(() => {
-    getData();
+    return () => getData();
   }, [])
 
   return !isloading ? (
