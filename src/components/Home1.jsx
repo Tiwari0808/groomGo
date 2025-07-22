@@ -4,9 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import toast from "react-hot-toast";
-import LoginPage from "./Login";
-import PhoneLogin from "./Login";
-export default function Home() {
+const Home = ()=> {
 
   const [shops, setShop] = useState([]);
   const [isloading, setIsLoading] = useState(true);
@@ -55,3 +53,5 @@ export default function Home() {
     </div>
   ) : <Spinner />
 }
+
+export default Home

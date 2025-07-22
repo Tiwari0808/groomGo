@@ -1,6 +1,6 @@
 
 import { Route, Routes } from 'react-router-dom'
-import Home from './components/home'
+
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Bookings from './components/Bookings'
@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast'
 import Login from './components/Login'
 import AdminDashboard from './components/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import Home from './components/Home1'
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
       {/* <Login/> */}
         <Toaster/>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home/>} />
           <Route path='shopDetails/:id' element={<ShopDetails />} />
           <Route path='/book/:id' element={<ProtectedRoute><Book /></ProtectedRoute>} />
           <Route path='admin' element={<Admin />} />
@@ -30,4 +31,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
