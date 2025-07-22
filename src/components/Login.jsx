@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { auth } from '../firebase/firebaseConfig';
+import { auth, db } from '../firebase/firebaseConfig';
 import toast from 'react-hot-toast';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuth } from '../context/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,8 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/';
 
   const clearForm = () => {
     setPassword('')
@@ -27,13 +30,17 @@ const Login = () => {
       if (isLogin) {
         const result = await signInWithEmailAndPassword(auth, email, password);
         setUser(result.user);
-        navigate('/')
+        navigate(from,{replace:true})
         toast.success('Logged in successfully');
       } else {
         if (password !== confirmPassword) return toast.error('Confirm password didnt matched');
         const result = await createUserWithEmailAndPassword(auth, email, password);
         setUser(result.user);
         setIsLogin(true)
+        await setDoc(doc(db,'users',result.user.uid),{
+          email:result.user.email,
+          role:'user'
+        })
         toast.success('registered successfully,Login now');
       }
     } catch (error) {

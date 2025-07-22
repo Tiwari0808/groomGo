@@ -67,7 +67,7 @@ export default function Book() {
       toast.success(`Booked for ${name} at ${selectedSlot}`);
       clearData();
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Something went wrong');
     } finally {
       setisLoading(false)
     }

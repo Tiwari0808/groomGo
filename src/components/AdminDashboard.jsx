@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const AdminDashboard = () => {
   return(
     <div>
-        
+        <h2>Admin dashboard</h2>
     </div>
   )
 }
