@@ -1,4 +1,4 @@
-import ShopCard from "./shopCard";
+import ShopCard from "./ShopCard";
 import { db } from "../firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";

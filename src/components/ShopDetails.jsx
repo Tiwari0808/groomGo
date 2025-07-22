@@ -1,6 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom"
-import pic4 from '../assets/images/pic4.jpg'
-import pic3 from '../assets/images/pic6.jpg'
 import { Gallery } from "./Gallary";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
