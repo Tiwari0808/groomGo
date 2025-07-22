@@ -1,12 +1,38 @@
-# React + Vite
+# ✂️ GroomGo – Barber Shop Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GroomGo is a modern web application that allows users to find barber shops nearby and book appointments with ease. It also supports shop owners with a custom dashboard to manage their bookings.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👤 For Users
+- 🔍 View nearby barber shops
+- 📅 Book slots for available services
+- 🔒 Secure authentication (Firebase)
+- 📱 Mobile responsive UI
+
+### 🛠️ For Shop Owners
+- ✅ Register/login manually (by admin)
+- 📥 View bookings specific to their shop(s)
+- 🗓️ Manage time slots and availability *(optional future feature)*
+
+### 🧑‍💻 For Admin
+- 🧾 Add barber shops manually with details and image
+- 🔑 Assign each shop an `ownerId` for shop owner login
+- 📊 Manage and monitor bookings
+
+---
+
+## 🏗️ Tech Stack
+
+- **Frontend**: React, Tailwind CSS, React Router
+- **Backend**: Firebase Firestore
+- **Authentication**: Firebase Auth
+- **Hosting**: Firebase Hosting / Vercel
+
+---
+
+📸 Demo
+Live: https://groom-go.vercel.app/
