@@ -20,10 +20,11 @@ const Home = ()=> {
       setIsLoading(false);
     } catch (error) {
       toast.error('Something went wrong')
+      setIsLoading(false)
     }
   }
   useEffect(() => {
-    return () => getData();
+    getData();
   }, [])
 
   return !isloading ? (
