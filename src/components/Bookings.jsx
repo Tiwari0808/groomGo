@@ -47,4 +47,7 @@ const Bookings = () => {
   ) : <Spinner/>
 }
 
-export default Bookings
+export default Bookings;
+
+
+

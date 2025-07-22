@@ -7,7 +7,7 @@ const HeroAdmin = () => {
     const adminLoginHandler = async()=>{
       alert("You'll be logout as user.continue?")
       logout();
-      navigate('/admin-dashboard')
+      navigate('/shop-bookings')
     }
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-slate-900 to-gray-800 px-4">
