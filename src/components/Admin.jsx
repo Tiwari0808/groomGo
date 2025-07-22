@@ -1,8 +1,11 @@
 import React from 'react'
+import HeroAdmin from './HeroAdmin'
 
 const Admin = () => {
   return (
-    <div>Admin</div>
+    <div>
+      <HeroAdmin/>
+    </div>
   )
 }
 

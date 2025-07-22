@@ -24,7 +24,11 @@ const Navbar = () => {
             <a onClick={()=>navigate('/')} className="cursor-pointer hover:text-gray-300 text-center">Home</a>
             <a onClick={()=>navigate('/bookings')} className="cursor-pointer hover:text-gray-300">My Booking</a>
             <a onClick={()=>navigate('/admin')} className="cursor-pointer hover:text-gray-300">Admin</a>
-            <a onClick={()=>handleLogin()} className="cursor-pointer hover:text-gray-300">{!user ? 'Login' : 'Logout'}</a>
+            <div className="flex flex-col items-center">
+              <p className="text-orange-600 text-[16px]">{user?.email}</p>
+              <a onClick={()=>handleLogin()} className="cursor-pointer hover:text-gray-300">{!user ? 'Login' : 'Logout'}</a>
+            </div>
+            
         </div>
     </nav>
   )
